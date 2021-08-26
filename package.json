@@ -1,0 +1,26 @@
+{
+  "name": "ui-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avon-poc/ui-utils.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avon-poc/ui-utils/issues"
+  },
+  "homepage": "https://github.com/avon-poc/ui-utils#readme",
+  "devDependencies": {
+    "rollup": "^2.56.3"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
