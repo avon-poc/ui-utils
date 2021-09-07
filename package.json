@@ -2,9 +2,12 @@
   "name": "ui-utils",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "rollup -c"
   },
   "repository": {
@@ -18,9 +21,14 @@
   },
   "homepage": "https://github.com/avon-poc/ui-utils#readme",
   "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.4",
+    "babel-jest": "^27.1.0",
+    "jest": "^27.1.0",
     "rollup": "^2.56.3"
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.3",
+    "swr": "^1.0.0"
   }
 }
