@@ -2,13 +2,8 @@ const converStrToObj = (str) => {
     let obj = {};
     if (str && typeof str === 'string') {
         const objStr = str.match(/\{(.)+\}/g);
-        try {
-            obj = objStr ? JSON.parse(objStr[0]) : {};
-        }
-        catch (e) {
-            obj = {};
-        }
-    }
+         obj = JSON.parse(objStr[0]);
+     }
     return obj;
 };
 
