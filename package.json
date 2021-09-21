@@ -23,13 +23,14 @@
   "homepage": "https://github.com/avon-poc/ui-utils#readme",
   "devDependencies": {
     "@babel/core": "^7.15.5",
-    "@babel/preset-env": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
     "babel-jest": "^27.1.0",
     "jest": "^27.1.0",
     "rollup": "^2.56.3"
   },
   "dependencies": {
-    "axios": "^0.21.3",
+    "axios": "^0.21.4",
+    "axios-mock-adapter": "^1.20.0",
     "create-next-app": "^11.1.2",
     "express": "^4.17.1",
     "swr": "^1.0.0"
