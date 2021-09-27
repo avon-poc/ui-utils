@@ -2,37 +2,6 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var axios = require('axios');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
-
-const api = axios__default['default'].create({
-    baseURL: process.env.BaseUrl,
-    headers: {}
-});
-
-class ProductService {
-
- static getProductList= async (params)=>{
-    try { 
-        let response = await api.get('/product',params);
-        let data = response.data;
-        return data;
-    }
-    catch(error){
-        throw error;
-    }
-}
-
-}
-
-var productService = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    'default': ProductService
-});
-
 const isParamsNotEmpty = (params) => {
     
     if( ((typeof params === "object" || typeof params === "string" )&& params != null && params.length>0 ) )
@@ -62,25 +31,36 @@ var priceFormatter$1 = /*#__PURE__*/Object.freeze({
     'default': priceFormatter
 });
 
-//import axios from 'axios/index.js';
+// Category service constant
+const baseURL = "http://localhost:9000";
+const categoryURL = "/api/category";
 
-class CategoryService {
+//Category service to call the category api
 
- static getCategoryList= async (params)=>{
-    try { 
-        let response = await api.get('http://localhost:9000/api/category',{
-             params: { 
-                perPage:'50', 
-                locale: params
-           }});
-        return await response.data.results;
+  
+  class CategoryService {
+ 
+    static getCategoryList = async (arg)=>{
+      const url = baseURL+categoryURL;
+      //http://localhost:9000/api/category/?perPage='50'?locale=${arg}";
+      const locale = arg ? arg : 'en';
+      const perPage = '50';
+      
+      try {
+        const result = await fetch(url+'?'+ new URLSearchParams({
+          perPage:perPage, 
+          locale: locale
+          }));
+        const data = await result.json();
+        console.log("resultss::::::::::::::::::::", data);
+        return data;
+      } catch (e) {
+        console.log("error::::::::::::::::::::", e);
+        return null;
+      }
     }
-    catch(error){
-        throw error;
-    }
-}
-
-}
+    
+   }
 
 var categoryService = /*#__PURE__*/Object.freeze({
     __proto__: null,
@@ -88,6 +68,5 @@ var categoryService = /*#__PURE__*/Object.freeze({
 });
 
 exports.CategoryService = categoryService;
-exports.ProductService = productService;
 exports.isObjectNotEmpty = isObjectNotEmpty;
 exports.priceFormatter = priceFormatter$1;
