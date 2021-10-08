@@ -1,4 +1,4 @@
-import isParamsNotEmpty  from "../isObjectNotEmpty";
+import isParamsNotEmpty  from "../isParamsNotEmpty";
  
 describe('is object not Empty', () => {
     
