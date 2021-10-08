@@ -56,10 +56,3 @@ it("handle exception in get Cart Service", async () => {
   const result = await CartService.getCart(baseURL, locale, cartID);
   expect(result).toEqual("Get Cart failure");
 })
-
-
-
-
-
-
-
