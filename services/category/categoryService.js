@@ -2,16 +2,17 @@
 import { baseURL, categoryURL, localeDefault, perPageDefault} from './categoryConstant';
 
 
-class CategoryService {
+export class CategoryService {
 
-  static getCategoryList = async (arg) => {
+  static getCategoryList = async (arg, market) => {
     const url = baseURL + categoryURL;
     const locale = arg ? arg : localeDefault;
     const perPage = perPageDefault;
     try {
       const result = await fetch(url + '?' + new URLSearchParams({
         perPage: perPage,
-        locale: locale
+        locale: locale,
+        market
       }));
       const data = await result.json();
       return data;
