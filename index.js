@@ -1,4 +1,13 @@
-export * as isObjectNotEmpty from './utils/isParamsNotEmpty';
-export * as priceFormatter from './utils/priceFormatter';
-export * as CategoryService from './services/category/categoryService';
-export * as CartService from './services/cart/cartService';
+import   isObjectNotEmpty from './utils/isParamsNotEmpty';
+import  priceFormatter from './utils/priceFormatter';
+import CategoryService from './services/category/categoryService';
+import  CartService  from './services/cart/cartService';
+import ApptusService from './services/apptus/apptusService';
+
+export {
+    isObjectNotEmpty,
+    priceFormatter,
+    CategoryService,
+    CartService,
+    ApptusService
+}
