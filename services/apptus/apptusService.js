@@ -41,6 +41,4 @@ class ApptusService {
 
 }
 
-
-
 export default ApptusService;
