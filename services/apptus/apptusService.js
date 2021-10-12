@@ -17,8 +17,6 @@ class ApptusService {
     const esalescustomerkey = esalecustmer ? esalecustmer :esalesCustomerKey
     const esalessessionkey = esalesesionkey ? esalesesionkey :esalesSessionKey
 
-
-
    const params = new URLSearchParams({
         window_first: windowfirst,
         window_last: windowlast,
