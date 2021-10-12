@@ -1,15 +1,17 @@
-export const displayDate = (timestamp) => {
-  const date = new Date(timestamp);
+export const displayDate = (timestamp, format) => {
+  const datenew = new Date(timestamp);
+  const date = datenew.getDate();
+   const month = datenew.getMonth();
+  const year = datenew.getFullYear();
+   if(format=='YYYY-MM-DD'){
+    let yearMonthDate =  year +'-'+(month+1) + '-' + date;
+    return yearMonthDate
+  }
+  /* istanbul ignore else */
+   if(format=='DD/MM/YYYY') {
+   let DateMonthYear =  date +'/'+(month+1) + '/' + year;
+   return DateMonthYear
+  }
+ };
 
-  const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June', 'July',
-    'August', 'September', 'October', 'November', 'December'
-  ];
-
-  const day = date.getDate();
-  const monthIndex = date.getMonth();
-  const year = date.getFullYear();
-
-  // return day + ' ' + monthNames[monthIndex] + ' ' + year;
-  return `${monthNames[monthIndex]} ${day}, ${year}`;
-};
+ 
