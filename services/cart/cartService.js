@@ -4,10 +4,10 @@ import { baseURL, cartURL, locale, cart, sku, quantity, cartId } from './cartCon
 
 class CartService {
 
-  static getCart = async (baseurl, localeLan, cartId) => {
+  static getCart = async (baseurl, localeLan, cart) => {
     const url = baseurl ? baseurl : baseURL
     const localeCxt = localeLan ? localeLan : locale
-    const cartID = cartId ? cartId : cartId
+    const cartID = cart.cartid ? cart.cartid : cartId
     const urlGetCart = url + cartURL + localeCxt + cart + '/' + cartID;
     try {
       const cartResult = await fetch(urlGetCart);
@@ -19,11 +19,11 @@ class CartService {
 
   }
 
-  static addProductToCart = async (baseurl, cartid, lineItemsku, quantitynum, localeLan) => {
+  static addProductToCart = async (baseurl, cart, lineItemsku, quantitynum, localeLan) => {
     try {
       const url = baseurl ? baseurl : baseURL
       const localeCxt = localeLan ? localeLan : locale
-      const cartID = cartid ? cartid : cartId
+      const cartID = cart.cartid ? cart.cartid : cartId
       const urlforAddProductToCart = url + cartURL + localeCxt + cart
       const lineitems = lineItemsku ? lineItemsku : sku
       const quantitycount = quantitynum ? quantitynum : quantity
