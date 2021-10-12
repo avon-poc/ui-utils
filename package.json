@@ -2,6 +2,7 @@
   "name": "ui-utils",
   "version": "1.0.0",
   "description": "",
+  "module": "commonjs",
   "main": "dist/index.js",
   "files": [
     "dist/"

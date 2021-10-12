@@ -2,7 +2,7 @@
 import { baseURL, cartURL, locale, cart, sku, quantity, cartId } from './cartConstant';
 
 
-class CartService {
+export class CartService {
 
   static getCart = async (baseurl, localeLan, cart) => {
     const url = baseurl ? baseurl : baseURL
