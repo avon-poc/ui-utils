@@ -2,6 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var _ = require('.');
+
 const isParamsNotEmpty = (params) => {
 
     if( ((typeof params === "object" || typeof params === "string" )&& params != null && params.length>0 ) )
@@ -128,39 +130,85 @@ const esalesMarket="AVONREP_EN-GB";
 const esalesCustomerKey="029f174e-1e87-4786-805e-30b225bc6932&";
 const esalesSessionKey ="d2cab655-faae-458e-bbcd-328e51a0128c&n";
 
-//apptus service to call the category api
+/**
+ * Retrieves a user by email.
+ * @async
+ * @method
+ * @param {String} baseurl - base url
+ *  @param {Number} winfirst - window first 
+ *  @param {Number} winlast - window last
+ *  @param {String} selectcategory - selected category 
+ *  @param {String} sort - sortBy 
+ *  @param {String} prodkey - product key
+ *  @param {String} catgtree - category tree
+ *  @param {String} esalemarkt - esalemarkt
+ * @param {String} esalecustmer - esalecustmer
+ * @param {String} esalesesionkey - esalesesionkey
+ * @returns {data} data object
+ *
+ */
 
 
 class ApptusService {
 
-  static getMegaMenu = async (baseurl, winfirst, winlast, selectcategory, sort, prodkey,catgtree, esalemarkt, esalecustmer, esalesesionkey ) => {
-    const baseUrl =  baseurl? baseurl : baseURL;
-    const url = baseUrl + categoryURL+pageName;
+  static getMegaMenu = async (baseurl, winfirst, winlast, selectcategory, sort, prodkey, catgtree, esalemarkt, esalecustmer, esalesesionkey) => {
+    const baseUrl = baseurl ? baseurl : baseURL;
+    const apiUrl = baseUrl + categoryURL + pageName;
     const windowfirst = winfirst ? winfirst : windowFirst;
     const windowlast = winlast ? winlast : windowLast;
-    const selectedcategory = selectcategory? selectcategory : selectedCategory;
+    const selectedcategory = selectcategory ? selectcategory : selectedCategory;
     const sortby = sort ? sort : sortBy;
-    const productkey = prodkey ? prodkey :productKey;
+    const productkey = prodkey ? prodkey : productKey;
     const categorytree = catgtree ? catgtree : categoryTree;
-    const esalesmarket = esalemarkt ? esalemarkt :esalesMarket;
-    const esalescustomerkey = esalecustmer ? esalecustmer :esalesCustomerKey;
-    const esalessessionkey = esalesesionkey ? esalesesionkey :esalesSessionKey;
+    const esalesmarket = esalemarkt ? esalemarkt : esalesMarket;
+    const esalescustomerkey = esalecustmer ? esalecustmer : esalesCustomerKey;
+    const esalessessionkey = esalesesionkey ? esalesesionkey : esalesSessionKey;
 
-   const params = new URLSearchParams({
-        window_first: windowfirst,
-        window_last: windowlast,
-        selected_category: selectedcategory,
-        sort_by: sortby,
-        product_key: productkey,
-        category_tree: categorytree,
-        'esales.market': esalesmarket,
-        'esales.customerKey': esalescustomerkey,
-        'esales.sessionKey': esalessessionkey
-       }).toString();
-       const parameters = JSON.stringify(params.replace(/%26/g, '&'));
-        
+    const params = new URLSearchParams({
+      window_first: windowfirst,
+      window_last: windowlast,
+      selected_category: selectedcategory,
+      sort_by: sortby,
+      product_key: productkey,
+      category_tree: categorytree,
+      'esales.market': esalesmarket,
+      'esales.customerKey': esalescustomerkey,
+      'esales.sessionKey': esalessessionkey
+    }).toString();
+    const parameters = JSON.stringify(params.replace(/%26/g, '&'));
+
     try {
-      const result = await fetch(url + '?' + JSON.stringify(parameters));
+      const result = await fetch(apiUrl + '?' + JSON.stringify(parameters));
+      const data = await result.json();
+      return data;
+    } catch (e) {
+      return e;
+    }
+  }
+
+}
+
+//Product service to call the product api
+
+
+class pdpService {
+
+  static getProductByID = async (baseurl, product , localeLan) => {
+    try {
+      const url = baseurl ? baseurl : _.baseURL;
+      const localeCxt = localeLan ? localeLan : _.locale;
+      const productID = product.productid ? product.productid : _.productId;
+      const urlforGetProductByProductId = url + _.productURL + localeCxt + _.products+ productID;
+     
+      const result = await fetch(urlforGetProductByProductId,
+        {
+          method: 'GET',
+          mode: 'no-cors',
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        }
+      );
       const data = await result.json();
       return data;
     } catch (e) {
@@ -174,4 +222,5 @@ exports.ApptusService = ApptusService;
 exports.CartService = CartService;
 exports.CategoryService = CategoryService;
 exports.isParamsNotEmpty = isParamsNotEmpty;
+exports.pdpService = pdpService;
 exports.priceFormatter = priceFormatter;
