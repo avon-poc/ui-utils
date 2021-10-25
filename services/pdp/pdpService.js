@@ -1,5 +1,5 @@
 //Product service to call the product api
-import { baseURL, productURL, locale, products,  productId } from '.';
+import { baseURL, productURL, locale, products,  productId } from './pdpConstant';
 
 
 export class pdpService {

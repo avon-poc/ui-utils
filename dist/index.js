@@ -2,8 +2,6 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var _ = require('.');
-
 const isParamsNotEmpty = (params) => {
 
     if( ((typeof params === "object" || typeof params === "string" )&& params != null && params.length>0 ) )
@@ -24,7 +22,7 @@ const priceFormatter = (n) => {
 };
 
 // Category service constant
-const baseURL$2 = "http://localhost:9000";
+const baseURL$3 = "http://localhost:9000";
 const categoryURL$1 = "/api/category";
 const localeDefault = "en";
 const perPageDefault = "50";
@@ -35,7 +33,7 @@ const perPageDefault = "50";
 class CategoryService {
 
   static getCategoryList = async (arg, market) => {
-    const url = baseURL$2 + categoryURL$1;
+    const url = baseURL$3 + categoryURL$1;
     const locale = arg ? arg : localeDefault;
     const perPage = perPageDefault;
     try {
@@ -55,9 +53,9 @@ class CategoryService {
 
 // Category service constant
 //localhost:7000/api/v1/en-uk/carts
-const baseURL$1 = "http://localhost:7000";
+const baseURL$2 = "http://localhost:7000";
 const cartURL = "/api/v1/";
-const locale = "en-uk/";
+const locale$1 = "en-uk/";
 const cartId = "";
 const sku = "16912-181";
 const quantity = 1;
@@ -70,8 +68,8 @@ const quantity = 1;
 class CartService {
 
   static getCart = async (baseurl, localeLan, cart) => {
-    const url = baseurl ? baseurl : baseURL$1;
-    const localeCxt = localeLan ? localeLan : locale;
+    const url = baseurl ? baseurl : baseURL$2;
+    const localeCxt = localeLan ? localeLan : locale$1;
     const cartID = cart.cartid ? cart.cartid : cartId;
     const urlGetCart = url + cartURL + localeCxt + cart + '/' + cartID;
     try {
@@ -86,8 +84,8 @@ class CartService {
 
   static addProductToCart = async (baseurl, cart, lineItemsku, quantitynum, localeLan) => {
     try {
-      const url = baseurl ? baseurl : baseURL$1;
-      const localeCxt = localeLan ? localeLan : locale;
+      const url = baseurl ? baseurl : baseURL$2;
+      const localeCxt = localeLan ? localeLan : locale$1;
       const cartID = cart.cartid ? cart.cartid : cartId;
       const urlforAddProductToCart = url + cartURL + localeCxt + cart;
       const lineitems = lineItemsku ? lineItemsku : sku;
@@ -117,7 +115,7 @@ class CartService {
 }
 
 // apptus constant
-const baseURL = "https://wFE4AE5CF.api.esales.apptus.cloud";
+const baseURL$1 = "https://wFE4AE5CF.api.esales.apptus.cloud";
 const categoryURL = "/api/v2";
 const pageName ="/panels/product-list-page/";
 const windowFirst=1;
@@ -152,7 +150,7 @@ const esalesSessionKey ="d2cab655-faae-458e-bbcd-328e51a0128c&n";
 class ApptusService {
 
   static getMegaMenu = async (baseurl, winfirst, winlast, selectcategory, sort, prodkey, catgtree, esalemarkt, esalecustmer, esalesesionkey) => {
-    const baseUrl = baseurl ? baseurl : baseURL;
+    const baseUrl = baseurl ? baseurl : baseURL$1;
     const apiUrl = baseUrl + categoryURL + pageName;
     const windowfirst = winfirst ? winfirst : windowFirst;
     const windowlast = winlast ? winlast : windowLast;
@@ -188,6 +186,13 @@ class ApptusService {
 
 }
 
+//localhost:7000/api/v1/en-uk/carts
+const baseURL = "http://localhost:7000";
+const productURL = "/api/v1/";
+const locale = "en-uk/";
+const products= "products";
+const productId = "";
+
 //Product service to call the product api
 
 
@@ -195,10 +200,10 @@ class pdpService {
 
   static getProductByID = async (baseurl, product , localeLan) => {
     try {
-      const url = baseurl ? baseurl : _.baseURL;
-      const localeCxt = localeLan ? localeLan : _.locale;
-      const productID = product.productid ? product.productid : _.productId;
-      const urlforGetProductByProductId = url + _.productURL + localeCxt + _.products+ productID;
+      const url = baseurl ? baseurl : baseURL;
+      const localeCxt = localeLan ? localeLan : locale;
+      const productID = product.productid ? product.productid : productId;
+      const urlforGetProductByProductId = url + productURL + localeCxt + products+ productID;
      
       const result = await fetch(urlforGetProductByProductId,
         {
