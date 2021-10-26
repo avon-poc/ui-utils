@@ -1,4 +1,5 @@
-// apptus constant
+//constant for apptus Service
+
 export const baseURL = "https://wFE4AE5CF.api.esales.apptus.cloud";
 export const categoryURL = "/api/v2";
 export const pageName ="/panels/product-list-page/"

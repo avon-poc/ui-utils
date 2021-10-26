@@ -52,26 +52,36 @@ class CategoryService {
 }
 
 // Category service constant
-//localhost:7000/api/v1/en-uk/carts
+
 const baseURL$2 = "http://localhost:7000";
 const cartURL = "/api/v1/";
 const locale$1 = "en-uk/";
+const carts= "carts";
 const cartId = "";
 const sku = "16912-181";
 const quantity = 1;
 
-//localhost:7000/api/v1/en-uk/carts/cf842b85-4d7a-49b3-b7fa-89969b80e069
-
-//Cart service to call the cart api
-
-
 class CartService {
+
+/**
+ * Retrieves cart object by cartId.
+ * @async
+ * @method
+ * @param {String} baseURL - base url
+ *  @param {String} cartURL - cartURL
+ *  @param {String} locale - locale 
+ *  @param {String} carts - carts
+ *  @param {String} sku - sku
+ *  @param {String} quantity - quantity
+ * @param {String} cartId - cart Id
+ * @returns {cartdData} cartdData object
+ */
 
   static getCart = async (baseurl, localeLan, cart) => {
     const url = baseurl ? baseurl : baseURL$2;
     const localeCxt = localeLan ? localeLan : locale$1;
     const cartID = cart.cartid ? cart.cartid : cartId;
-    const urlGetCart = url + cartURL + localeCxt + cart + '/' + cartID;
+    const urlGetCart = url + cartURL + localeCxt + carts + '/' + cartID;
     try {
       const cartResult = await fetch(urlGetCart);
       const cartdData = await cartResult.json();
@@ -81,6 +91,18 @@ class CartService {
     }
 
   }
+
+  /**
+ * Retrieves Add Product To Cart.
+ * @async
+ * @method
+ * @param {String} baseURL - base url
+ *  @param {Object} cart - cart
+ *  @param {String} lineItemsku - lineItemsku 
+ *  @param {Number} quantitynum - quantitynum
+ *  @param {String} localeLan - locale
+ * @returns {data} data object
+ */
 
   static addProductToCart = async (baseurl, cart, lineItemsku, quantitynum, localeLan) => {
     try {
@@ -114,7 +136,8 @@ class CartService {
 
 }
 
-// apptus constant
+//constant for apptus Service
+
 const baseURL$1 = "https://wFE4AE5CF.api.esales.apptus.cloud";
 const categoryURL = "/api/v2";
 const pageName ="/panels/product-list-page/";
@@ -129,7 +152,7 @@ const esalesCustomerKey="029f174e-1e87-4786-805e-30b225bc6932&";
 const esalesSessionKey ="d2cab655-faae-458e-bbcd-328e51a0128c&n";
 
 /**
- * Retrieves a user by email.
+ * Retrieves Mega Menu from Apptus Service.
  * @async
  * @method
  * @param {String} baseurl - base url
@@ -163,8 +186,8 @@ class ApptusService {
     const esalessessionkey = esalesesionkey ? esalesesionkey : esalesSessionKey;
 
     const params = new URLSearchParams({
-      window_first: windowfirst,
-      window_last: windowlast,
+      "window_first": windowfirst,
+      "window_last": windowlast,
       selected_category: selectedcategory,
       sort_by: sortby,
       product_key: productkey,
@@ -173,10 +196,11 @@ class ApptusService {
       'esales.customerKey': esalescustomerkey,
       'esales.sessionKey': esalessessionkey
     }).toString();
-    const parameters = JSON.stringify(params.replace(/%26/g, '&'));
-
+    const parameters = params.replace(/%26/g, '&');
+    const UrlParameter = parameters.replace(/%3A/g, ':');
+    const UrlParameters = UrlParameter.replace(/%27/g, "'");
     try {
-      const result = await fetch(apiUrl + '?' + JSON.stringify(parameters));
+      const result = await fetch(apiUrl + '?' + UrlParameters);
       const data = await result.json();
       return data;
     } catch (e) {
@@ -190,10 +214,21 @@ class ApptusService {
 const baseURL = "http://localhost:7000";
 const productURL = "/api/v1/";
 const locale = "en-uk/";
-const products= "products";
+const products= "products/";
 const productId = "";
 
-//Product service to call the product api
+/**
+ * Retrieves product from product Service .
+ * @async
+ * @method
+ * @param {String} baseurl - base url
+ *  @param {String} productURL - productURL
+ *  @param {String} locale - locale 
+ *  @param {String} products - products 
+ *  @param {String} productId - productId
+ * @returns {result} result object
+ *
+ */
 
 
 class pdpService {
@@ -203,8 +238,7 @@ class pdpService {
       const url = baseurl ? baseurl : baseURL;
       const localeCxt = localeLan ? localeLan : locale;
       const productID = product.productid ? product.productid : productId;
-      const urlforGetProductByProductId = url + productURL + localeCxt + products+ productID;
-     
+      const urlforGetProductByProductId = url + productURL + localeCxt + products + productID;
       const result = await fetch(urlforGetProductByProductId,
         {
           method: 'GET',

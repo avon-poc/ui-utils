@@ -1,14 +1,28 @@
-//Cart service to call the cart api
-import { baseURL, cartURL, locale, cart, sku, quantity, cartId } from './cartConstant';
+
+import { baseURL, cartURL, locale, carts, sku, quantity, cartId } from './cartConstant';
 
 
 export class CartService {
+
+/**
+ * Retrieves cart object by cartId.
+ * @async
+ * @method
+ * @param {String} baseURL - base url
+ *  @param {String} cartURL - cartURL
+ *  @param {String} locale - locale 
+ *  @param {String} carts - carts
+ *  @param {String} sku - sku
+ *  @param {String} quantity - quantity
+ * @param {String} cartId - cart Id
+ * @returns {cartdData} cartdData object
+ */
 
   static getCart = async (baseurl, localeLan, cart) => {
     const url = baseurl ? baseurl : baseURL
     const localeCxt = localeLan ? localeLan : locale
     const cartID = cart.cartid ? cart.cartid : cartId
-    const urlGetCart = url + cartURL + localeCxt + cart + '/' + cartID;
+    const urlGetCart = url + cartURL + localeCxt + carts + '/' + cartID;
     try {
       const cartResult = await fetch(urlGetCart);
       const cartdData = await cartResult.json();
@@ -18,6 +32,18 @@ export class CartService {
     }
 
   }
+
+  /**
+ * Retrieves Add Product To Cart.
+ * @async
+ * @method
+ * @param {String} baseURL - base url
+ *  @param {Object} cart - cart
+ *  @param {String} lineItemsku - lineItemsku 
+ *  @param {Number} quantitynum - quantitynum
+ *  @param {String} localeLan - locale
+ * @returns {data} data object
+ */
 
   static addProductToCart = async (baseurl, cart, lineItemsku, quantitynum, localeLan) => {
     try {

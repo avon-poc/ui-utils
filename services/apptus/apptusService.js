@@ -1,5 +1,5 @@
 /**
- * Retrieves a user by email.
+ * Retrieves Mega Menu from Apptus Service.
  * @async
  * @method
  * @param {String} baseurl - base url
@@ -34,8 +34,8 @@ class ApptusService {
     const esalessessionkey = esalesesionkey ? esalesesionkey : esalesSessionKey
 
     const params = new URLSearchParams({
-      window_first: windowfirst,
-      window_last: windowlast,
+      "window_first": windowfirst,
+      "window_last": windowlast,
       selected_category: selectedcategory,
       sort_by: sortby,
       product_key: productkey,
@@ -44,10 +44,11 @@ class ApptusService {
       'esales.customerKey': esalescustomerkey,
       'esales.sessionKey': esalessessionkey
     }).toString()
-    const parameters = JSON.stringify(params.replace(/%26/g, '&'))
-
+    const parameters = params.replace(/%26/g, '&')
+    const UrlParameter = parameters.replace(/%3A/g, ':')
+    const UrlParameters = UrlParameter.replace(/%27/g, "'")
     try {
-      const result = await fetch(apiUrl + '?' + JSON.stringify(parameters));
+      const result = await fetch(apiUrl + '?' + UrlParameters);
       const data = await result.json();
       return data;
     } catch (e) {

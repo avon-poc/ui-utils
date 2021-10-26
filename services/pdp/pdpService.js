@@ -1,4 +1,15 @@
-//Product service to call the product api
+/**
+ * Retrieves product from product Service .
+ * @async
+ * @method
+ * @param {String} baseurl - base url
+ *  @param {String} productURL - productURL
+ *  @param {String} locale - locale 
+ *  @param {String} products - products 
+ *  @param {String} productId - productId
+ * @returns {result} result object
+ *
+ */
 import { baseURL, productURL, locale, products,  productId } from './pdpConstant';
 
 
@@ -9,8 +20,7 @@ export class pdpService {
       const url = baseurl ? baseurl : baseURL
       const localeCxt = localeLan ? localeLan : locale
       const productID = product.productid ? product.productid : productId
-      const urlforGetProductByProductId = url + productURL + localeCxt + products+ productID
-     
+      const urlforGetProductByProductId = url + productURL + localeCxt + products + productID
       const result = await fetch(urlforGetProductByProductId,
         {
           method: 'GET',

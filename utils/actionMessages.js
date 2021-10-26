@@ -7,7 +7,6 @@ export const displayActionMessage = (msg, status = 'info') => {
     : status === 'success'
       ? 'toast-success'
       : 'toast-error'
-    // eslint-disable-next-line indent
     }`;
   span.className = 'toast-msg';
   span.textContent = msg;
