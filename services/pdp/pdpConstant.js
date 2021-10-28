@@ -1,4 +1,6 @@
-//localhost:7000/api/v1/en-uk/carts
+/** @constant
+    @type {string}
+*/
 export const baseURL = "http://localhost:7000";
 export const productURL = "/api/v1/";
 export const locale = "en-uk/";

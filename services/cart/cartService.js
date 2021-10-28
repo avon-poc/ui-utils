@@ -1,5 +1,9 @@
-
 import { baseURL, cartURL, locale, carts, sku, quantity, cartId } from './cartConstant';
+
+/**
+ * Cart Service  Class
+ * @class CartService
+ */
 
 
 export class CartService {
@@ -42,7 +46,7 @@ export class CartService {
  *  @param {String} lineItemsku - lineItemsku 
  *  @param {Number} quantitynum - quantitynum
  *  @param {String} localeLan - locale
- * @returns {data} data object
+ * @returns {Object} data object
  */
 
   static addProductToCart = async (baseurl, cart, lineItemsku, quantitynum, localeLan) => {

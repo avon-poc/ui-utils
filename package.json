@@ -10,7 +10,8 @@
   "scripts": {
     "test": "jest",
     "build": "rollup -c",
-    "test-with-coverage": "jest --watchAll --coverage"
+    "test-with-coverage": "jest --watchAll --coverage",
+    "gendoc": "./node_modules/jsdoc/jsdoc.js -c jsdoc.config.json"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,12 @@
+import { baseURL, categoryURL, pageName, windowFirst, windowLast, selectedCategory, sortBy, productKey, categoryTree, esalesMarket, esalesCustomerKey, esalesSessionKey } from './apptusConstant'
+
+/**
+ * Apptus Service class
+ * @class ApptusService
+ */
+
+class ApptusService {
+
 /**
  * Retrieves Mega Menu from Apptus Service.
  * @async
@@ -15,10 +24,6 @@
  * @returns {data} data object
  *
  */
-import { baseURL, categoryURL, pageName, windowFirst, windowLast, selectedCategory, sortBy, productKey, categoryTree, esalesMarket, esalesCustomerKey, esalesSessionKey } from './apptusConstant'
-
-
-class ApptusService {
 
   static getMegaMenu = async (baseurl, winfirst, winlast, selectcategory, sort, prodkey, catgtree, esalemarkt, esalecustmer, esalesesionkey) => {
     const baseUrl = baseurl ? baseurl : baseURL

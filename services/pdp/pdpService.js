@@ -1,19 +1,21 @@
-/**
- * Retrieves product from product Service .
- * @async
- * @method
- * @param {String} baseurl - base url
- *  @param {String} productURL - productURL
- *  @param {String} locale - locale 
- *  @param {String} products - products 
- *  @param {String} productId - productId
- * @returns {result} result object
- *
- */
 import { baseURL, productURL, locale, products,  productId } from './pdpConstant';
 
-
+/**
+ * Pdp Service  Class
+ * @class pdpService
+ */
 export class pdpService {
+
+  /**
+ * Retrieves product by porduct Id 
+ *  @async
+ *  @method
+ *  @param {String} baseurl - base url
+ *  @param {Object} products - product 
+ *  @param {String} localeLan - localeLan
+ *  @returns {result} result object
+ *
+ */
 
   static getProductByID = async (baseurl, product , localeLan) => {
     try {
