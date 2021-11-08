@@ -1,4 +1,4 @@
-import { baseURL, categoryURL, pageName, windowFirst, windowLast, selectedCategory, sortBy, productKey, categoryTree, esalesMarket, esalesCustomerKey, esalesSessionKey } from './apptusConstant'
+import { baseURL, apiVersion, pageName, windowFirst, windowLast, windowFirstRecommendation, selectedCategory, windowLastRecommendation, sortBy, filter,productKey, categoryTree, esalesMarket, esalesCustomerKey, esalesSessionKey } from './apptusConstant'
 
 /**
  * Apptus Service class
@@ -16,6 +16,9 @@ class ApptusService {
  *  @param {Number} winlast - window last
  *  @param {String} selectcategory - selected category 
  *  @param {String} sort - sortBy 
+ * @param  {String} filtr - filter 
+ *  @param {Number} winFirstRecommendation - window First Recommendation 
+ *  @param {Number} winLastRecommendation - window Last Recommendation
  *  @param {String} prodkey - product key
  *  @param {String} catgtree - category tree
  *  @param {String} esalemarkt - esalemarkt
@@ -25,30 +28,33 @@ class ApptusService {
  *
  */
 
-  static getMegaMenu = async (baseurl, winfirst, winlast, selectcategory, sort, prodkey, catgtree, esalemarkt, esalecustmer, esalesesionkey) => {
+  static getProductList = async (baseurl, winfirst, winlast, selectcategory, filtr, sort, winFirstRecommendation, winLastRecommendation , esalemarkt, esalecustmer, esalesesionkey) => {
+    
     const baseUrl = baseurl ? baseurl : baseURL
-    const apiUrl = baseUrl + categoryURL + pageName
+    const apiUrl = baseUrl + apiVersion + pageName
     const windowfirst = winfirst ? winfirst : windowFirst
     const windowlast = winlast ? winlast : windowLast
+    const wFirstRecommendation = winFirstRecommendation?winFirstRecommendation: windowFirstRecommendation
+     const fltr = filtr? filtr: filter
+    const wLastRecommendation = winLastRecommendation? winLastRecommendation: windowLastRecommendation
     const selectedcategory = selectcategory ? selectcategory : selectedCategory
     const sortby = sort ? sort : sortBy
-    const productkey = prodkey ? prodkey : productKey
-    const categorytree = catgtree ? catgtree : categoryTree
     const esalesmarket = esalemarkt ? esalemarkt : esalesMarket
     const esalescustomerkey = esalecustmer ? esalecustmer : esalesCustomerKey
     const esalessessionkey = esalesesionkey ? esalesesionkey : esalesSessionKey
-
+    
     const params = new URLSearchParams({
+      'esales.market': esalesmarket,
+      'esales.customerKey': esalescustomerkey,
+      'esales.sessionKey': esalessessionkey,
       "window_first": windowfirst,
       "window_last": windowlast,
       selected_category: selectedcategory,
+      filter: fltr,
       sort_by: sortby,
-      product_key: productkey,
-      category_tree: categorytree,
-      'esales.market': esalesmarket,
-      'esales.customerKey': esalescustomerkey,
-      'esales.sessionKey': esalessessionkey
-    }).toString()
+      'window_first_recommendations': wFirstRecommendation,
+      'window_last_recommendations': wLastRecommendation
+      }).toString()
     const parameters = params.replace(/%26/g, '&')
     const UrlParameter = parameters.replace(/%3A/g, ':')
     const UrlParameters = UrlParameter.replace(/%27/g, "'")

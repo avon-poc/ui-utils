@@ -29,17 +29,17 @@ const esalesMarket="AVONREP_EN-GB"
 const esalesCustomerKey="029f174e-1e87-4786-805e-30b225bc6932&"
 const esalesSessionKey ="d2cab655-faae-458e-bbcd-328e51a0128c&n"
 it("Apptus Service with argument", async () => {
-  const res = await ApptusService.getMegaMenu(baseURL,windowFirst,windowLast,selectedCategory,sortBy,productKey,categoryTree,esalesMarket,esalesCustomerKey,esalesSessionKey);
+  const res = await ApptusService.getProductList(baseURL,windowFirst,windowLast,selectedCategory,sortBy,productKey,categoryTree,esalesMarket,esalesCustomerKey,esalesSessionKey);
   expect(res.data.total).toEqual(data.total);
 })
 
 it("Apptus Service without argument", async () => { 
-  const res = await ApptusService.getMegaMenu('','','','','','','','','','');
+  const res = await ApptusService.getProductList('','','','','','','','','','');
   expect(res.data.total).toEqual(data.total);
 })
 
 it("handle exception in Apptus Service", async () => { 
   fetch.mockImplementation(()=> Promise.reject("API failure"));
-  const result = await ApptusService.getMegaMenu("a");
+  const result = await ApptusService.getProductList("a");
   expect(result).toEqual("API failure");
 })

@@ -23,17 +23,30 @@ const priceFormatter = (n) => {
 
 // Category service constant
 const baseURL$3 = "http://localhost:9000";
-const categoryURL$1 = "/api/category";
+const categoryURL = "/api/category";
 const localeDefault = "en";
 const perPageDefault = "50";
 
-//Category service to call the category api
-
+/**
+ * Category Service  Class
+ * @class CategoryService
+ */
 
 class CategoryService {
 
+  /**
+ * Retrieves category List.
+ * @async
+ * @method
+ * @param {String} baseURL - base url
+ *  @param {String} categoryURL - categoryURL
+ *  @param {String} arg - arg
+ *  @param {String} locale - locale 
+ * @returns {Object} data object
+ */
+
   static getCategoryList = async (arg, market) => {
-    const url = baseURL$3 + categoryURL$1;
+    const url = baseURL$3 + categoryURL;
     const locale = arg ? arg : localeDefault;
     const perPage = perPageDefault;
     try {
@@ -60,6 +73,12 @@ const carts= "carts";
 const cartId = "";
 const sku = "16912-181";
 const quantity = 1;
+
+/**
+ * Cart Service  Class
+ * @class CartService
+ */
+
 
 class CartService {
 
@@ -101,7 +120,7 @@ class CartService {
  *  @param {String} lineItemsku - lineItemsku 
  *  @param {Number} quantitynum - quantitynum
  *  @param {String} localeLan - locale
- * @returns {data} data object
+ * @returns {Object} data object
  */
 
   static addProductToCart = async (baseurl, cart, lineItemsku, quantitynum, localeLan) => {
@@ -139,17 +158,29 @@ class CartService {
 //constant for apptus Service
 
 const baseURL$1 = "https://wFE4AE5CF.api.esales.apptus.cloud";
-const categoryURL = "/api/v2";
+const apiVersion = "/api/v2";
 const pageName ="/panels/product-list-page/";
 const windowFirst=1;
 const windowLast=20;
+const windowFirstRecommendation=1;
+const windowLastRecommendation=5;
 const selectedCategory="categories_AVONREP_EN-GB:'301'";
 const sortBy="relevance";
-const productKey="3935";
-const categoryTree="categories_AVONREP_EN-GB";
+const filter="market:'UK'";
 const esalesMarket="AVONREP_EN-GB";
 const esalesCustomerKey="029f174e-1e87-4786-805e-30b225bc6932&";
 const esalesSessionKey ="d2cab655-faae-458e-bbcd-328e51a0128c&n";
+
+//https://wFE4AE5CF.api.esales.apptus.cloud/api/v2/panels/product-list-page?esales.market=AVONREP_EN-GB&esales.customerKey=029f174e-1e87-4786-805e-30b225bc6932&&esales.sessionKey=d2cab655-faae-458e-bbcd-328e51a0128c&n&window_first=1&window_last=20&selected_category=categories_AVONREP_EN-GB:'301'&filter=market:’UK’&sort_by=relevance&window_first_recommendations=1&window_last_recommendations=5
+
+//https://wfe4ae5cf.api.esales.apptus.cloud/api/v2/panels/product-list-page/?window_first=1&window_last=20&selected_category=categories_AVONREP_EN-GB:%27301%27&sort_by=market:%27UK%27&product_key=relevance&category_tree=1&esales.market=5&esales.customerKey=AVONREP_EN-GB&esales.sessionKey=029f174e-1e87-4786-805e-30b225bc6932&
+
+/**
+ * Apptus Service class
+ * @class ApptusService
+ */
+
+class ApptusService {
 
 /**
  * Retrieves Mega Menu from Apptus Service.
@@ -160,6 +191,9 @@ const esalesSessionKey ="d2cab655-faae-458e-bbcd-328e51a0128c&n";
  *  @param {Number} winlast - window last
  *  @param {String} selectcategory - selected category 
  *  @param {String} sort - sortBy 
+ * @param  {String} filtr - filter 
+ *  @param {Number} winFirstRecommendation - window First Recommendation 
+ *  @param {Number} winLastRecommendation - window Last Recommendation
  *  @param {String} prodkey - product key
  *  @param {String} catgtree - category tree
  *  @param {String} esalemarkt - esalemarkt
@@ -169,33 +203,33 @@ const esalesSessionKey ="d2cab655-faae-458e-bbcd-328e51a0128c&n";
  *
  */
 
-
-class ApptusService {
-
-  static getMegaMenu = async (baseurl, winfirst, winlast, selectcategory, sort, prodkey, catgtree, esalemarkt, esalecustmer, esalesesionkey) => {
+  static getProductList = async (baseurl, winfirst, winlast, selectcategory, filtr, sort, winFirstRecommendation, winLastRecommendation , esalemarkt, esalecustmer, esalesesionkey) => {
+    
     const baseUrl = baseurl ? baseurl : baseURL$1;
-    const apiUrl = baseUrl + categoryURL + pageName;
+    const apiUrl = baseUrl + apiVersion + pageName;
     const windowfirst = winfirst ? winfirst : windowFirst;
     const windowlast = winlast ? winlast : windowLast;
+    const wFirstRecommendation = winFirstRecommendation?winFirstRecommendation: windowFirstRecommendation;
+     const fltr = filtr? filtr: filter;
+    const wLastRecommendation = winLastRecommendation? winLastRecommendation: windowLastRecommendation;
     const selectedcategory = selectcategory ? selectcategory : selectedCategory;
     const sortby = sort ? sort : sortBy;
-    const productkey = prodkey ? prodkey : productKey;
-    const categorytree = catgtree ? catgtree : categoryTree;
     const esalesmarket = esalemarkt ? esalemarkt : esalesMarket;
     const esalescustomerkey = esalecustmer ? esalecustmer : esalesCustomerKey;
     const esalessessionkey = esalesesionkey ? esalesesionkey : esalesSessionKey;
-
+    
     const params = new URLSearchParams({
+      'esales.market': esalesmarket,
+      'esales.customerKey': esalescustomerkey,
+      'esales.sessionKey': esalessessionkey,
       "window_first": windowfirst,
       "window_last": windowlast,
       selected_category: selectedcategory,
+      filter: fltr,
       sort_by: sortby,
-      product_key: productkey,
-      category_tree: categorytree,
-      'esales.market': esalesmarket,
-      'esales.customerKey': esalescustomerkey,
-      'esales.sessionKey': esalessessionkey
-    }).toString();
+      'window_first_recommendations': wFirstRecommendation,
+      'window_last_recommendations': wLastRecommendation
+      }).toString();
     const parameters = params.replace(/%26/g, '&');
     const UrlParameter = parameters.replace(/%3A/g, ':');
     const UrlParameters = UrlParameter.replace(/%27/g, "'");
@@ -210,7 +244,9 @@ class ApptusService {
 
 }
 
-//localhost:7000/api/v1/en-uk/carts
+/** @constant
+    @type {string}
+*/
 const baseURL = "http://localhost:7000";
 const productURL = "/api/v1/";
 const locale = "en-uk/";
@@ -218,20 +254,21 @@ const products= "products/";
 const productId = "";
 
 /**
- * Retrieves product from product Service .
- * @async
- * @method
- * @param {String} baseurl - base url
- *  @param {String} productURL - productURL
- *  @param {String} locale - locale 
- *  @param {String} products - products 
- *  @param {String} productId - productId
- * @returns {result} result object
+ * Pdp Service  Class
+ * @class pdpService
+ */
+class pdpService {
+
+  /**
+ * Retrieves product by porduct Id 
+ *  @async
+ *  @method
+ *  @param {String} baseurl - base url
+ *  @param {Object} products - product 
+ *  @param {String} localeLan - localeLan
+ *  @returns {result} result object
  *
  */
-
-
-class pdpService {
 
   static getProductByID = async (baseurl, product , localeLan) => {
     try {
