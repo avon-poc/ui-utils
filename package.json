@@ -27,6 +27,7 @@
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "babel-jest": "^27.1.0",
+    "cross-fetch": "^3.1.4",
     "jest": "^27.1.0",
     "jsdoc": "^3.6.7",
     "rollup": "^2.56.3"
@@ -37,10 +38,7 @@
     "bluebird": "^3.7.2",
     "create-next-app": "^11.1.2",
     "express": "^4.17.1",
-    "fetch-polyfill2": "0.0.3",
-    "jest-fetch-mock": "^3.0.3",
     "json3": "^3.3.3",
-    "node-fetch": "^3.0.0",
     "polyfills": "^2.1.1",
     "save": "^2.4.0",
     "swr": "^1.0.0"
