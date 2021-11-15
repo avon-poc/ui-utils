@@ -2,7 +2,8 @@ import isParamsNotEmpty from './utils/isParamsNotEmpty';
 import priceFormatter from './utils/priceFormatter';
 import CategoryService from './services/category/categoryService';
 import CartService  from './services/cart/cartService';
-import ApptusService from './services/apptus/apptusService';
+import ApptusProductListService from './services/apptus/productList/apptusProductListService';
+import ApptusNavigationBarService from './services/apptus/navigationBar/apptusNavigationBarService';
 import pdpService from './services/pdp/pdpService';
 
 export {
@@ -10,6 +11,7 @@ export {
     priceFormatter,
     CategoryService,
     CartService,
-    ApptusService,
+    ApptusProductListService,
+    ApptusNavigationBarService,
     pdpService
 }
