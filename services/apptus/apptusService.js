@@ -14,7 +14,7 @@ import {
   ESALES_CUSTOMER_KEY,
   ESALES_SESSION_KEY,
   NAVIGATION_ENDPOINT
-} from './apptusConstant'
+} from './apptusConstant.js'
 
 import fetch from "cross-fetch";
 
@@ -125,10 +125,20 @@ class ApptusService {
       'esales.sessionKey': eSalesSessionKey,
       'include-empty-categories': false
     });
+    /*
+    export type Category = {
+      id: string - key
+      name: string - displayName
+      slug: string attributes.url[0]
+      children: Category[] - subcategories
+    }
+    */
 
     try {
       const res = await fetch(`${apiUrl}?${params}`);
-      return await res.json();
+      const data = await res.json();
+      const { categoryOverview } = data
+      return categoryOverview[0].categoryTree.subcategories
     } catch (e) {
       console.error('ApptusService.getNavigation() error:', e);
       return e;
