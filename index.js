@@ -1,5 +1,6 @@
 import isParamsNotEmpty from './utils/isParamsNotEmpty';
 import priceFormatter from './utils/priceFormatter';
+import { cookieHelper } from './utils/cookieHelper';
 import CategoryService from './services/category/categoryService';
 import CartService  from './services/cart/cartService';
 import ApptusProductListService from './services/apptus/productList/apptusProductListService';
@@ -13,5 +14,6 @@ export {
     CartService,
     ApptusProductListService,
     ApptusNavigationBarService,
-    pdpService
+    pdpService,
+    cookieHelper
 }
